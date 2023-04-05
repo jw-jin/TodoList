@@ -7,12 +7,47 @@
 
 
 <body>
-  <!-- Trigger/Open The Modal -->
-  <button id="myBtn">todolist</button>
-  <h1>mytodolist</h1>
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>번호</th>
+        <th>할 일</th>
+        <th>수행 여부</th>
+        <th>삭제</th>
+        <th>수정</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="tl : ${todoListObj}">
+        <td th:text="${tl.id}"></td>
+        <td th:text="${tl.context}"></td>
+        <td th:text="${tl.status}"></td>
+        <td>
+          <form th:action="|todolist/${tl.id}/delete|" th:method="post">
+            <button type="submit">삭제</button>
+          </form>
+        </td>
+        <td>
+          <form th:action="|todolist/${tl.id}/update|" th:method="post">
+            <input type="text" id="updateContext" name="updateContext" placeholder="텍스트">
+            <button type="submit">수정</button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <!-- The Modal -->
-
-
+  <form action="/todolist/write" method="post">
+    <input type="text" id="writeContext" name="writeContext" placeholder="텍스트">
+    <button type="submit">추가</button>
+  </form>
+  <button class="modal-btn">open modal</button>
+  <div class="modal">
+    <div class="modal-body">hi</div>
+  </div>
 </body>
+
+<script type="text/javascript" th:src="@{/js/todolist.js}"></script>
 </html>

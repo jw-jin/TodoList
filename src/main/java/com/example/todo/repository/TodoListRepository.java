@@ -8,7 +8,7 @@ public interface TodoListRepository {
 
     Todo saveTodoList(Todo todo);
     List<Todo> getTodoList();
-    boolean updateById();
-    boolean deleteById();
+    void updateById(Long Id, String Context);
+    void deleteById(Long Id);
 
 }

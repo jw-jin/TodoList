@@ -22,4 +22,13 @@ public class TodoListService {
         todoListRepository.saveTodoList(todo);
     }
 
+    public void updateTodoList(Long Id, String newContext){
+        todoListRepository.updateById(Id, newContext);
+    }
+    public void deleteTodoList(Long Id){
+        todoListRepository.deleteById(Id);
+    }
+
+
+
 }

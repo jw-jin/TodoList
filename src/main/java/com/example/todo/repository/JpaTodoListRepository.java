@@ -32,13 +32,17 @@ public class JpaTodoListRepository implements TodoListRepository {
     }
 
     @Override
-    public boolean updateById() {
-        return false;
+    public void updateById(Long Id, String newContext) {
+        Todo updateTodo = em.find(Todo.class, Id);
+        updateTodo.setContext(newContext);
+        em.merge(updateTodo);
+
     }
 
     @Override
-    public boolean deleteById() {
-        return false;
+    public void deleteById(Long Id) {
+        Todo deleteTodo = em.find(Todo.class,Id);
+        em.remove(deleteTodo);
     }
 
 

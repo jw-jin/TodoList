@@ -7,5 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TodoForm {
-    private String context;
+    private String writeContext;
+    private String updateContext;
+
 }

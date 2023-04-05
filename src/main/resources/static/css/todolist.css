@@ -1,8 +1,35 @@
-body {
-    background-color: lightblue;
-}
+
 
 h1 {
-    font-size: 5px;
+    font-size: 19px;
     color : #ff00ff;
+}
+
+
+.modal{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.modal-body{
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 200px;
+    height: 200px;
+
+    text-align: center;
+
+    border-radius: 10px;
+    transform: translateX(-50%) translateY(-50%);
+    border: 1px solid black;
+}
+.modal-btn {
+    border-radius: 10px;
+
 }

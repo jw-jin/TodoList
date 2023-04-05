@@ -19,28 +19,44 @@ public class TodoListController {
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.GET) @ResponseBody
-    public List<Todo> list(Model model) {
+    public List<Todo> list() {
         List<Todo> todoList = todoListService.getTodoList();
         return todoList;
     }
 
-    @GetMapping("/todolist")
-    public String todolist() {
+    @RequestMapping("/todolist")
+    public String todolist(Model model) {
+        List<Todo> todoListObj = todoListService.getTodoList();
+        model.addAttribute("todoListObj", todoListObj);
         return "/todolist";
     }
 
-    @GetMapping("/write")
-    public String createForm() {
-        return "/write";
-    }
+//    @GetMapping("/write")
+//    public String createForm() {
+//        return "/write";
+//    }
 
-    @PostMapping("/write")
+    @PostMapping("/todolist/write")
     public String write(TodoForm form){
         Todo todo = new Todo();
-        todo.setContext(form.getContext());
+        System.out.println(form.getWriteContext());
+        todo.setContext(form.getWriteContext());
 
         todoListService.writeTodoList(todo);
 
-        return "redirect:/";
+        return "redirect:/todolist";
     }
+
+    @PostMapping("/todolist/{id}/delete")
+    public String delete(@PathVariable(name = "id") Long Id){
+        todoListService.deleteTodoList(Id);
+        return "redirect:/todolist";
+    }
+
+    @PostMapping("/todolist/{id}/update")
+    public String update(TodoForm form, @PathVariable(name = "id") Long Id){
+        todoListService.updateTodoList(Id, form.getUpdateContext());
+        return "redirect:/todolist";
+    }
+
 }
