@@ -25,6 +25,10 @@ public class TodoListService {
     public void updateTodoList(Long Id, String newContext){
         todoListRepository.updateById(Id, newContext);
     }
+
+    public void updateTodoList(Long Id, int Status){
+        todoListRepository.updateById(Id, Status);
+    }
     public void deleteTodoList(Long Id){
         todoListRepository.deleteById(Id);
     }

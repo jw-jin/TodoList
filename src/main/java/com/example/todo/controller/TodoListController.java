@@ -59,4 +59,11 @@ public class TodoListController {
         return "redirect:/todolist";
     }
 
+    @PostMapping("/todolist/{id}/statuschange/{value}")
+    public String update(@PathVariable(name = "id") Long Id,
+                         @PathVariable(name = "value") int Status){
+        todoListService.updateTodoList(Id, Status);
+        return "redirect:/todolist";
+    }
+
 }

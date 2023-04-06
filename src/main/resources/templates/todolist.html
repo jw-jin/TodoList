@@ -1,51 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" th:href="@{/css/todolist.css}" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 
 
 
-<body>
-  <div>
-    <table>
-      <thead>
-      <tr>
-        <th>번호</th>
-        <th>할 일</th>
-        <th>수행 여부</th>
-        <th>삭제</th>
-        <th>수정</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="tl : ${todoListObj}">
-        <td th:text="${tl.id}"></td>
-        <td th:text="${tl.context}"></td>
-        <td th:text="${tl.status}"></td>
-        <td>
-          <form th:action="|todolist/${tl.id}/delete|" th:method="post">
-            <button type="submit">삭제</button>
-          </form>
-        </td>
-        <td>
-          <form th:action="|todolist/${tl.id}/update|" th:method="post">
-            <input type="text" id="updateContext" name="updateContext" placeholder="텍스트">
-            <button type="submit">수정</button>
-          </form>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+<body th:onload="updateIcon()">
+  <div class="container">
+    <div class="child">
+      <h1>TodoList</h1>
+      <table>
+        <thead>
+        <tr>
+          <th style="width: 4%">Index</th>
+          <th class="contextHeader">Todo</th>
+          <th class="progressHeader" >Progress</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tl, tlCnt : ${todoListObj}">
+          <input type="hidden" class="hidden-id" th:value="${tl.id}"/>
+          <td th:text="${tlCnt.count}"></td>
+          <td class="contextTab" onclick="modifyContext(this)" th:text="${tl.context}">
+          </td>
+          <td class="progressTab" onclick="changeStatus(this)">
+            <input type="hidden" class="hidden-status" th:value="${tl.status}"/>
+            <span id="statusIcon" class="material-icons-outlined"></span>
+            <br/>
+            <span id="statusText"></span>
 
-  <form action="/todolist/write" method="post">
-    <input type="text" id="writeContext" name="writeContext" placeholder="텍스트">
-    <button type="submit">추가</button>
-  </form>
-  <button class="modal-btn">open modal</button>
-  <div class="modal">
-    <div class="modal-body">hi</div>
+<!--            <span id="not_started" class="material-icons-outlined">not_started</span>-->
+<!--            <span id="in_progress" class="material-icons-outlined">update</span>-->
+<!--            <span id="done" class="material-icons-outlined">check_circle</span>-->
+          </td>
+          <td>
+            <form th:action="|todolist/${tl.id}/delete|" th:method="post">
+              <button type="submit">삭제</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="writeContainer">
+        <form action="/todolist/write" method="post">
+          <input type="text" id="writeContext" name="writeContext" placeholder="텍스트">
+          <button type="submit">추가</button>
+        </form>
+      </div>
+
+
+    </div>
+
   </div>
 </body>
 

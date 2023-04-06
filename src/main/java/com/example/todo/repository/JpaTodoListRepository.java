@@ -35,8 +35,12 @@ public class JpaTodoListRepository implements TodoListRepository {
     public void updateById(Long Id, String newContext) {
         Todo updateTodo = em.find(Todo.class, Id);
         updateTodo.setContext(newContext);
-        em.merge(updateTodo);
+    }
 
+    @Override
+    public void updateById(Long Id, int Status) {
+        Todo updateTodo = em.find(Todo.class, Id);
+        updateTodo.setStatus(Status);
     }
 
     @Override

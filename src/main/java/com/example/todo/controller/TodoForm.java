@@ -9,5 +9,4 @@ import lombok.Setter;
 public class TodoForm {
     private String writeContext;
     private String updateContext;
-
 }
